@@ -9,5 +9,4 @@ public class CarritoGtApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CarritoGtApplication.class, args);
 	}
-
 }
