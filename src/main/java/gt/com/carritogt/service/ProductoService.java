@@ -16,6 +16,10 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
+    public Producto guardarProducto(Producto producto) {
+        return productoRepository.save(producto);
+    }
+
     public List<Producto> listarProductos() {
         return productoRepository.findAll();
     }
