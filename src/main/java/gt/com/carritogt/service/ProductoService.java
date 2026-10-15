@@ -27,4 +27,23 @@ public class ProductoService {
     public Optional<Producto> obtenerProductoPorId(Integer id) {
         return productoRepository.findById(id);
     }
+
+    public Producto actualizarProducto(Integer id, Producto productoActualizado) {
+        return productoRepository.findById(id)
+                .map(productoExistente -> {
+                    productoExistente.setNombre(productoActualizado.getNombre());
+                    productoExistente.setCodigo(productoActualizado.getCodigo());
+                    productoExistente.setImagen(productoActualizado.getImagen());
+                    productoExistente.setPrecio(productoActualizado.getPrecio());
+                    return productoRepository.save(productoExistente);
+                })
+                .orElse(null);
+    }
+    public boolean eliminarProducto(Integer id) {
+        if (!productoRepository.existsById(id)) {
+            return false;
+        }
+        productoRepository.deleteById(id);
+        return true;
+    }
 }
