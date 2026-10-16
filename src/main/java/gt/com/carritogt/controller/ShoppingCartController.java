@@ -35,6 +35,20 @@ public class ShoppingCartController {
         return shoppingCartService.agregar(item);
     }
 
+    @PutMapping("/{id}")
+    public ShoppingCartItem actualizar(
+            @PathVariable Integer id,
+            @RequestBody ShoppingCartItem item) {
+
+        ShoppingCartItem existente = shoppingCartService.obtenerPorId(id);
+
+        existente.setIdProducto(item.getIdProducto());
+        existente.setCodUsuario(item.getCodUsuario());
+        existente.setCantidad(item.getCantidad());
+
+        return shoppingCartService.actualizar(id, existente);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable Integer id) {

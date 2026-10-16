@@ -51,4 +51,16 @@ public class ShoppingCartService {
     public void vaciar() {
         shoppingCartRepository.deleteAll();
     }
+
+    public ShoppingCartItem actualizar(Integer id, ShoppingCartItem item) {
+        ShoppingCartItem existente = shoppingCartRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Elemento del carrito no encontrado"));
+
+        existente.setIdProducto(item.getIdProducto());
+        existente.setCodUsuario(item.getCodUsuario());
+        existente.setCantidad(item.getCantidad());
+
+        return shoppingCartRepository.save(existente);
+    }
 }
